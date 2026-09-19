@@ -38,12 +38,16 @@
                          PlaceholderText="Song Style"/>
 
                 <Border Grid.Row="5">
-                    <StackPanel Orientation="Horizontal">
-                        <Button Content="Generate"
-                                Command="{Binding GenerateCommand}"/>
-                        <Button Content="Save"
-                                Command="{Binding SaveCommand}"/>
-                    </StackPanel>
+                    <Border Margin="20">
+                        <StackPanel Orientation="Horizontal">
+                            <Button Content="Generate"
+                                    Margin="0 0 10 0"
+                                    Command="{Binding GenerateCommand}"/>
+                            <Button Content="Save"
+                                    Margin="10 0 0 0"
+                                    Command="{Binding SaveCommand}"/>
+                        </StackPanel>
+                    </Border>
                 </Border>
 
             </Grid>
