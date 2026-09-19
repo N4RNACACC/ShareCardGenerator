@@ -1,0 +1,77 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:ShareCardGenerator.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="ShareCardGenerator.Views.MainWindow"
+        x:DataType="vm:MainViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="ShareCardGenerator">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainViewModel />
+    </Design.DataContext>
+
+    <Grid ColumnDefinitions="* , 5 , 3*">
+        <Border Grid.Column="0"
+                CornerRadius="0 10 10 0"
+                BorderBrush="Black"
+                BorderThickness="1">
+            <Grid RowDefinitions="* , * , *, * , * , *  ">
+                <TextBox Grid.Row="0"
+                         Text="{Binding SourceUrl}"
+                         PlaceholderText="Source URL" />
+                <TextBox Grid.Row="1"
+                         Text="{Binding SongTitle}"
+                         PlaceholderText="Song Title"/>
+                <TextBox Grid.Row="2"
+                         Text="{Binding ArtistName}"
+                         PlaceholderText="Artist Name"/>
+                <TextBox Grid.Row="3"
+                         Text="{Binding AlbumTitle}"
+                         PlaceholderText="Album Title"/>
+                <TextBox Grid.Row="4"
+                         Text="{Binding SongStyle}"
+                         PlaceholderText="Song Style"/>
+
+                <Border Grid.Row="5">
+                    <StackPanel Orientation="Horizontal">
+                        <Button Content="Generate"
+                                Command="{Binding GenerateCommand}"/>
+                        <Button Content="Save"
+                                Command="{Binding SaveCommand}"/>
+                    </StackPanel>
+                </Border>
+
+            </Grid>
+        </Border>
+
+        <Border Grid.Column="2">
+            <Grid RowDefinitions="30 , *">
+                <Border Grid.Row="0"
+                        CornerRadius="10 0 0 10"
+                        BorderBrush="Black"
+                        BorderThickness="1">
+                    <TextBlock Text="Preview"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Margin="5"/>
+                </Border>
+                <Border Grid.Row="1"
+                        CornerRadius="10 0 0 10"
+                        BorderBrush="Black"
+                        BorderThickness="1">
+                    <Border BorderBrush="Black"
+                            BorderThickness="1"
+                            Margin="120">
+                        <UserControl x:Name="CardControl"/>
+                    </Border>
+                </Border>
+            </Grid>
+        </Border>
+    </Grid>
+
+</Window>
