@@ -1,0 +1,45 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="ShareCardGenerator.Views.ShareCardView"
+             xmlns:vm="using:ShareCardGenerator.ViewModels"
+             x:DataType="vm:MainViewModel"
+             >
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainViewModel />
+    </Design.DataContext>
+
+    <Grid ColumnDefinitions="2*, *">
+        <Border Grid.Column="0"
+                Grid.Row="0">
+            <Border Margin="20"
+                    >
+                <StackPanel>
+                    <TextBlock Text="Aurora Radio 极光电台"
+                               FontSize="20"/>
+                    <TextBlock Text="{Binding IdInfo}"
+                               FontSize="20"/>
+                    <TextBlock Text="   "/>
+                    <TextBlock Text="{Binding SongInfo}"
+                               FontSize="20"/>
+                    <TextBlock FontSize="20">
+                        <Run Text="专辑："/>
+                        <Run Text="{Binding AlbumName}"/>
+                    </TextBlock>
+                    <TextBlock FontSize="20">
+                        <Run Text="风格："/>
+                        <Run Text="{Binding SongStyle}"/>
+                    </TextBlock>
+                </StackPanel>
+            </Border>
+        </Border>
+        <Border Grid.Column="1">
+            <Image/>
+        </Border>
+    </Grid>
+</UserControl>
