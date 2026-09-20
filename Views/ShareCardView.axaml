@@ -5,6 +5,7 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="ShareCardGenerator.Views.ShareCardView"
              xmlns:vm="using:ShareCardGenerator.ViewModels"
+             xmlns:avalonia="clr-namespace:QrCodeStyling.Avalonia;assembly=QrCodeStyling.Avalonia"
              x:DataType="vm:MainViewModel"
              >
 
@@ -17,21 +18,25 @@
     <Grid ColumnDefinitions="2*, *">
         <Border Grid.Column="0"
                 Grid.Row="0">
-            <Border Margin="20"
-                    >
+            <Border Margin="20">
                 <StackPanel>
                     <TextBlock Text="Aurora Radio 极光电台"
-                               FontSize="20"/>
+                               FontSize="20"
+                               TextWrapping="Wrap"/>
                     <TextBlock Text="{Binding IdInfo}"
-                               FontSize="20"/>
+                               FontSize="20"
+                               TextWrapping="Wrap"/>
                     <TextBlock Text="   "/>
                     <TextBlock Text="{Binding SongInfo}"
-                               FontSize="20"/>
-                    <TextBlock FontSize="20">
+                               FontSize="20"
+                               TextWrapping="Wrap"/>
+                    <TextBlock FontSize="20"
+                               TextWrapping="Wrap">
                         <Run Text="专辑："/>
                         <Run Text="{Binding AlbumName}"/>
                     </TextBlock>
-                    <TextBlock FontSize="20">
+                    <TextBlock FontSize="20"
+                               TextWrapping="Wrap">
                         <Run Text="风格："/>
                         <Run Text="{Binding SongStyle}"/>
                     </TextBlock>
@@ -39,7 +44,9 @@
             </Border>
         </Border>
         <Border Grid.Column="1">
-            <Image/>
+            <avalonia:QrCode Data="{Binding QrCodeData}"
+                             Height="250"
+                             Width="250"/>
         </Border>
     </Grid>
 </UserControl>

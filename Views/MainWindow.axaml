@@ -24,19 +24,24 @@
             <Grid RowDefinitions="* , * , *, * , * , *  ">
                 <TextBox Grid.Row="0"
                          Text="{Binding SourceUrl}"
-                         PlaceholderText="Source URL" />
+                         PlaceholderText="Source URL"
+                         TextWrapping="Wrap"/>
                 <TextBox Grid.Row="1"
                          Text="{Binding SongTitle}"
-                         PlaceholderText="Song Title"/>
+                         PlaceholderText="Song Title"
+                         TextWrapping="Wrap"/>
                 <TextBox Grid.Row="2"
                          Text="{Binding ArtistName}"
-                         PlaceholderText="Artist Name"/>
+                         PlaceholderText="Artist Name"
+                         TextWrapping="Wrap"/>
                 <TextBox Grid.Row="3"
                          Text="{Binding AlbumName}"
-                         PlaceholderText="Album Title"/>
+                         PlaceholderText="Album Title"
+                         TextWrapping="Wrap"/>
                 <TextBox Grid.Row="4"
                          Text="{Binding SongStyle}"
-                         PlaceholderText="Song Style"/>
+                         PlaceholderText="Song Style"
+                         TextWrapping="Wrap"/>
 
                 <Border Grid.Row="5">
                     <Border Margin="10">
@@ -60,10 +65,18 @@
                         CornerRadius="10 0 0 10"
                         BorderBrush="Black"
                         BorderThickness="1">
-                    <TextBlock Text="Preview"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Center"
-                               Margin="5"/>
+                    <Grid ColumnDefinitions="*, 8*">
+                        <TextBlock Grid.Column="0"
+                                   Text="Preview"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   Margin="5"/>
+                        <TextBlock Grid.Column="1"
+                                   Text="{Binding InfoBar}"
+                                   Margin="5"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Center"/>
+                    </Grid>
                 </Border>
                 <Border Grid.Row="1"
                         CornerRadius="10 0 0 10"
@@ -72,7 +85,7 @@
                     <Border BorderBrush="Black"
                             BorderThickness="1"
                             Margin="10 100 10 100">
-                        <views:ShareCardView/>
+                        <views:ShareCardView DataContext="{Binding}"/>
                     </Border>
                 </Border>
             </Grid>
