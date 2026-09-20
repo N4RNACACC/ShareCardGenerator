@@ -2,7 +2,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="ShareCardGenerator.App"
              xmlns:local="using:ShareCardGenerator"
-             xmlns:flowery="clr-namespace:Flowery;assembly=Flowery.NET"
              RequestedThemeVariant="Light">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
@@ -12,6 +11,5 @@
 
     <Application.Styles>
         <FluentTheme />
-        <flowery:DaisyUITheme />
     </Application.Styles>
 </Application>
