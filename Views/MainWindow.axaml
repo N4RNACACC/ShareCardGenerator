@@ -3,6 +3,7 @@
         xmlns:vm="using:ShareCardGenerator.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:views="clr-namespace:ShareCardGenerator.Views"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="ShareCardGenerator.Views.MainWindow"
         x:DataType="vm:MainViewModel"
@@ -31,20 +32,20 @@
                          Text="{Binding ArtistName}"
                          PlaceholderText="Artist Name"/>
                 <TextBox Grid.Row="3"
-                         Text="{Binding AlbumTitle}"
+                         Text="{Binding AlbumName}"
                          PlaceholderText="Album Title"/>
                 <TextBox Grid.Row="4"
                          Text="{Binding SongStyle}"
                          PlaceholderText="Song Style"/>
 
                 <Border Grid.Row="5">
-                    <Border Margin="20">
-                        <StackPanel Orientation="Horizontal">
-                            <Button Content="Generate"
-                                    Margin="0 0 10 0"
+                    <Border Margin="10">
+                        <StackPanel>
+                            <Button Content="GenerateQRCode"
+                                    Margin="0 0 0 2"
                                     Command="{Binding GenerateCommand}"/>
-                            <Button Content="Save"
-                                    Margin="10 0 0 0"
+                            <Button Content="SaveCard"
+                                    Margin="0 2 0 0"
                                     Command="{Binding SaveCommand}"/>
                         </StackPanel>
                     </Border>
@@ -70,8 +71,8 @@
                         BorderThickness="1">
                     <Border BorderBrush="Black"
                             BorderThickness="1"
-                            Margin="120">
-                        <UserControl x:Name="CardControl"/>
+                            Margin="10 100 10 100">
+                        <views:ShareCardView/>
                     </Border>
                 </Border>
             </Grid>
