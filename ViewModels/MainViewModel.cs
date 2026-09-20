@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
@@ -6,12 +7,16 @@ namespace ShareCardGenerator.ViewModels;
 
 public partial class MainViewModel : ViewModelBase
 {
+
+    public string AppPath = AppContext.BaseDirectory;
     // Other ViewModels
 
     // Other properties and commands
     [ObservableProperty] public partial string IdInfo { get; set; } = idInfo();
 
     [ObservableProperty] public partial string InfoBar { get; set; } = "Ready";
+
+    [ObservableProperty] public partial string BackgroundImage { get; set; }
 
     [ObservableProperty] public partial string SourceUrl { get; set; }
 
@@ -30,6 +35,15 @@ public partial class MainViewModel : ViewModelBase
 
     [RelayCommand] private void Generate()
     {
+        var backgroundImageSavePath = Path.Combine(AppPath, "background");
+        InfoBar = "Saving background image...";
+        if (!Directory.Exists(backgroundImageSavePath))
+        {
+            Directory.CreateDirectory(backgroundImageSavePath);
+        }
+
+
+
         var time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         if (string.IsNullOrEmpty(SourceUrl))
         {
@@ -44,7 +58,6 @@ public partial class MainViewModel : ViewModelBase
 
     [RelayCommand] private static void Save()
     {
-
     }
 
     private static string idInfo()
