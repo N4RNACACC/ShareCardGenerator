@@ -20,6 +20,10 @@ public static class ImageDownloader
         {
             Directory.CreateDirectory(Path.Combine(BasePath, "Cache", "BackgroundImages"));
         }
+        else
+        {
+            return savePath;
+        }
 
         // 构建URL
         var url = $"https://pixiv.re/{pid}-{number}.jpg";
