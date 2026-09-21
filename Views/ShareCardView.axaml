@@ -31,7 +31,7 @@
                         <TextBlock Text="{Binding IdInfo}"
                                    FontSize="20"
                                    TextWrapping="Wrap"/>
-                        <TextBlock Text="   "/>
+                        <TextBlock Text="=============================="/>
                         <TextBlock Text="{Binding SongInfo}"
                                    FontSize="20"
                                    TextWrapping="Wrap"/>
@@ -45,13 +45,22 @@
                             <Run Text="风格："/>
                             <Run Text="{Binding SongStyle}"/>
                         </TextBlock>
+                        <TextBlock Text="=============================="/>
+                        <TextBlock>
+                            <Run Text="背景PID："/>
+                            <Run Text="{Binding BackgroundImageID}"/>
+                        </TextBlock>
                     </StackPanel>
                 </Border>
             </Border>
             <Border Grid.Column="1">
                 <avalonia:QrCode Data="{Binding QrCodeData}"
                                  Height="250"
-                                 Width="250"/>
+                                 Width="250"
+                                 HorizontalAlignment="Center"
+                                 VerticalAlignment="Center"
+                                 CornerRadius="25"
+                                 Dot="Circle"/>
             </Border>
         </Grid>
     </Border>
