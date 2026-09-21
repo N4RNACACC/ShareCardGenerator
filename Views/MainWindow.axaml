@@ -47,10 +47,17 @@
                          PlaceholderText="Song Style"
                          TextWrapping="Wrap"
                          Margin="0 5 0 5"/>
-                <TextBox Grid.Row="5"
-                         Text="{Binding BackgroundImage}"
-                         PlaceholderText="Background Image (Pixiv ID)"
-                         Margin="0 5 0 5"/>
+                <StackPanel Grid.Row="5"
+                            Orientation="Horizontal"
+                            Margin="0 5 0 5">
+                    <TextBox Text="{Binding BackgroundImageID}"
+                             PlaceholderText="BackgroundPID"
+                             Width="135"
+                             Margin="0 0 2 0"/>
+                    <TextBox Text="{Binding IDNumber}"
+                             PlaceholderText="Num"
+                             Margin="2 0 0 0"/>
+                </StackPanel>
 
                 <Border Grid.Row="6">
                     <Border Margin="10">

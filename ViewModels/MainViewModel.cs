@@ -1,5 +1,8 @@
 using System;
-using System.IO;
+using System.Threading.Tasks;
+using Avalonia.Media;
+using Avalonia.Media.Imaging;
+using ShareCardGenerator.Utilities;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
@@ -16,7 +19,11 @@ public partial class MainViewModel : ViewModelBase
 
     [ObservableProperty] public partial string InfoBar { get; set; } = "Ready";
 
-    [ObservableProperty] public partial string BackgroundImage { get; set; }
+    [ObservableProperty] public partial IImage CardImage { get; set; }
+
+    [ObservableProperty] public partial string BackgroundImageID { get; set; }
+
+    [ObservableProperty] public partial string IDNumber { get; set; }
 
     [ObservableProperty] public partial string SourceUrl { get; set; }
 
@@ -33,18 +40,26 @@ public partial class MainViewModel : ViewModelBase
     public string SongInfo => $"{SongTitle} - {ArtistName}";
 
 
-    [RelayCommand] private void Generate()
+    [RelayCommand] private async Task Generate()
     {
-        var backgroundImageSavePath = Path.Combine(AppPath, "background");
-        InfoBar = "Saving background image...";
-        if (!Directory.Exists(backgroundImageSavePath))
+        var time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+        if (string.IsNullOrEmpty(IDNumber) || string.IsNullOrEmpty(SourceUrl))
         {
-            Directory.CreateDirectory(backgroundImageSavePath);
+            InfoBar = $"[{time}][ERROR] ID number or URL is not set or invalid.";
+            return;
         }
 
+        InfoBar = $"[{time}][INFO] Downloading background image...";
+        // 下载背景图并获取保存路径
+        var savePath =  await ImageDownloader.DownloadWithHeadersAsync(BackgroundImageID, IDNumber);
 
+        // 设置卡片背景
+        CardImage = new Bitmap(savePath);
 
-        var time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        InfoBar = $"[{time}][INFO] Apply background image successful.";
+
+        // 生成二维码
         if (string.IsNullOrEmpty(SourceUrl))
         {
             InfoBar = $"[{time}][ERROR] URL is not set or invalid.";

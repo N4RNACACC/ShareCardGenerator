@@ -15,38 +15,44 @@
         <vm:MainViewModel />
     </Design.DataContext>
 
-    <Grid ColumnDefinitions="2*, *">
-        <Border Grid.Column="0"
-                Grid.Row="0">
-            <Border Margin="20">
-                <StackPanel>
-                    <TextBlock Text="Aurora Radio 极光电台"
-                               FontSize="20"
-                               TextWrapping="Wrap"/>
-                    <TextBlock Text="{Binding IdInfo}"
-                               FontSize="20"
-                               TextWrapping="Wrap"/>
-                    <TextBlock Text="   "/>
-                    <TextBlock Text="{Binding SongInfo}"
-                               FontSize="20"
-                               TextWrapping="Wrap"/>
-                    <TextBlock FontSize="20"
-                               TextWrapping="Wrap">
-                        <Run Text="专辑："/>
-                        <Run Text="{Binding AlbumName}"/>
-                    </TextBlock>
-                    <TextBlock FontSize="20"
-                               TextWrapping="Wrap">
-                        <Run Text="风格："/>
-                        <Run Text="{Binding SongStyle}"/>
-                    </TextBlock>
-                </StackPanel>
+    <Border>
+        <Border.Background>
+            <ImageBrush Source="{Binding CardImage}" Stretch="UniformToFill"/>
+        </Border.Background>
+        <Grid ColumnDefinitions="2*, *">
+            <Border Grid.Column="0"
+                    Grid.Row="0">
+
+                <Border Margin="20">
+                    <StackPanel>
+                        <TextBlock Text="Aurora Radio 极光电台"
+                                   FontSize="20"
+                                   TextWrapping="Wrap"/>
+                        <TextBlock Text="{Binding IdInfo}"
+                                   FontSize="20"
+                                   TextWrapping="Wrap"/>
+                        <TextBlock Text="   "/>
+                        <TextBlock Text="{Binding SongInfo}"
+                                   FontSize="20"
+                                   TextWrapping="Wrap"/>
+                        <TextBlock FontSize="20"
+                                   TextWrapping="Wrap">
+                            <Run Text="专辑："/>
+                            <Run Text="{Binding AlbumName}"/>
+                        </TextBlock>
+                        <TextBlock FontSize="20"
+                                   TextWrapping="Wrap">
+                            <Run Text="风格："/>
+                            <Run Text="{Binding SongStyle}"/>
+                        </TextBlock>
+                    </StackPanel>
+                </Border>
             </Border>
-        </Border>
-        <Border Grid.Column="1">
-            <avalonia:QrCode Data="{Binding QrCodeData}"
-                             Height="250"
-                             Width="250"/>
-        </Border>
-    </Grid>
+            <Border Grid.Column="1">
+                <avalonia:QrCode Data="{Binding QrCodeData}"
+                                 Height="250"
+                                 Width="250"/>
+            </Border>
+        </Grid>
+    </Border>
 </UserControl>
