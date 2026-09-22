@@ -23,7 +23,7 @@ public partial class MainWindow : Window
         }
     }
 
-    private async void OnSaveRequested(object? sender, System.EventArgs e)
+    private async void OnSaveRequested(object? sender, EventArgs e)
     {
         var id = DateTime.Now.ToString("yyyyMMdd");
         // 找到 ShareCardView
