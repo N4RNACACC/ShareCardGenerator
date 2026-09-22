@@ -11,7 +11,7 @@ public static class ImageDownloader
 
     private static readonly HttpClient HttpClient = new HttpClient();
 
-    public static async Task<string> DownloadWithHeadersAsync(string pid , string number )
+    public static async Task<string> DownloadWithHeadersAsync(string pid , string number , bool isSingleImgMode)
     {
         var savePath = Path.Combine(BasePath, "Cache", "BackgroundImages", pid+ "-" + number + ".jpg");
 
@@ -25,8 +25,16 @@ public static class ImageDownloader
             return savePath;
         }
 
+        string url ;
         // 构建URL
-        var url = $"https://pixiv.re/{pid}-{number}.jpg";
+        if (isSingleImgMode)
+        {
+            url = $"https://pixiv.re/{pid}.jpg";
+        }
+        else
+        {
+            url = $"https://pixiv.re/{pid}-{number}.jpg";
+        }
 
         // 初始化Http请求
         using var request = new HttpRequestMessage(HttpMethod.Get, url);
