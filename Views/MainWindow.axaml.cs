@@ -72,6 +72,6 @@ public partial class MainWindow : Window
 
         using var bitmap = new RenderTargetBitmap(pixelSize, dpi);
         bitmap.Render(target);
-        bitmap.Save(output);
+        bitmap.Save(output, PngBitmapEncoderOptions.Default);
     }
 }
