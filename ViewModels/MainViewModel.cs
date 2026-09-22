@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Threading.Tasks;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
@@ -48,6 +49,41 @@ public partial class MainViewModel : ViewModelBase
         SaveRequested?.Invoke(this, EventArgs.Empty);
     }
 
+    [RelayCommand] private void CleanCache()
+    {
+        try
+        {
+            var cacheDir = Path.Combine(AppContext.BaseDirectory, "Cache", "BackgroundImages");
+
+            if (!Directory.Exists(cacheDir))
+            {
+                InfoBar = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}][INFO] Cache directory does not exist, nothing to clean.";
+                return;
+            }
+
+            var files = Directory.GetFiles(cacheDir, "*.jpg");
+            var deleted = 0;
+
+            foreach (var file in files)
+            {
+                try
+                {
+                    File.Delete(file);
+                    deleted++;
+                }
+                catch (Exception ex)
+                {
+                    InfoBar = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}][WARN] Failed to delete {Path.GetFileName(file)}: {ex.Message}";
+                }
+            }
+
+            InfoBar = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}][INFO] Cache cleaned: {deleted} file(s) removed.";
+        }
+        catch (Exception ex)
+        {
+            InfoBar = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}][ERROR] Clean cache failed: {ex.Message}";
+        }
+    }
 
     [RelayCommand] private async Task Generate()
     {
