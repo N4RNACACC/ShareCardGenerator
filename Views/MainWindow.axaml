@@ -87,7 +87,7 @@
                             BorderThickness="1">
                         <Border BorderBrush="Black"
                                 BorderThickness="1"
-                                Margin="10 100 10 100">
+                                Margin="10 90 10 50">
                             <views:ShareCardView x:Name="ShareCardView"
                                                  DataContext="{Binding}"/>
                         </Border>
