@@ -21,6 +21,8 @@ public partial class MainViewModel : ViewModelBase
 
     [ObservableProperty] public partial IImage CardImage { get; set; }
 
+    [ObservableProperty] public partial bool SingleImgMode { get; set; } = false; // 单图模式
+
     [ObservableProperty] public partial string BackgroundImageID { get; set; }
 
     [ObservableProperty] public partial string IDNumber { get; set; }
@@ -39,20 +41,27 @@ public partial class MainViewModel : ViewModelBase
 
     public string SongInfo => $"{SongTitle} - {ArtistName}";
 
+    public event System.EventHandler? SaveRequested;
+
+    [RelayCommand] private void Save()
+    {
+        SaveRequested?.Invoke(this, EventArgs.Empty);
+    }
+
 
     [RelayCommand] private async Task Generate()
     {
         var time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
-        if (string.IsNullOrEmpty(IDNumber) || string.IsNullOrEmpty(SourceUrl))
+        if (string.IsNullOrEmpty(BackgroundImageID) || string.IsNullOrEmpty(SourceUrl))
         {
-            InfoBar = $"[{time}][ERROR] ID number or URL is not set or invalid.";
+            InfoBar = $"[{time}][ERROR] Background image PID or URL is not set or invalid.";
             return;
         }
 
         InfoBar = $"[{time}][INFO] Downloading background image...";
         // 下载背景图并获取保存路径
-        var savePath =  await ImageDownloader.DownloadWithHeadersAsync(BackgroundImageID, IDNumber);
+        var savePath =  await ImageDownloader.DownloadWithHeadersAsync(BackgroundImageID, IDNumber, SingleImgMode);
 
         // 设置卡片背景
         CardImage = new Bitmap(savePath);
@@ -69,10 +78,6 @@ public partial class MainViewModel : ViewModelBase
             QrCodeData = SourceUrl;
             InfoBar = $"[{time}][INFO] QrCode generate successful.";
         }
-    }
-
-    [RelayCommand] private static void Save()
-    {
     }
 
     private static string idInfo()

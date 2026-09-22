@@ -21,7 +21,7 @@
                 CornerRadius="0 10 10 0"
                 BorderBrush="Black"
                 BorderThickness="1">
-            <Grid RowDefinitions="* , * , * , * , 0.5* , 0.5* , * ">
+            <Grid RowDefinitions="* , 0.5* ,0.5* ,0.5* , 0.5* , 0.5* , * ">
                 <TextBox Grid.Row="0"
                          Text="{Binding SourceUrl}"
                          PlaceholderText="Source URL"
@@ -62,6 +62,8 @@
                 <Border Grid.Row="6">
                     <Border Margin="10">
                         <StackPanel>
+                            <CheckBox Content="Single Img Mode"
+                                      IsChecked="{Binding SingleImgMode}"/>
                             <Button Content="Generate Card"
                                     Margin="0 0 0 2"
                                     Command="{Binding GenerateCommand}"/>
@@ -101,7 +103,8 @@
                     <Border BorderBrush="Black"
                             BorderThickness="1"
                             Margin="10 100 10 100">
-                        <views:ShareCardView DataContext="{Binding}"/>
+                        <views:ShareCardView x:Name="ShareCardView"
+                                             DataContext="{Binding}"/>
                     </Border>
                 </Border>
             </Grid>

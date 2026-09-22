@@ -19,48 +19,66 @@
         <Border.Background>
             <ImageBrush Source="{Binding CardImage}" Stretch="UniformToFill"/>
         </Border.Background>
-        <Grid ColumnDefinitions="2*, *">
+        <Grid ColumnDefinitions="1.5*, *">
             <Border Grid.Column="0"
                     Grid.Row="0">
 
-                <Border Margin="20">
-                    <StackPanel>
+                <Border Margin="20"
+                        Background="White"
+                        Opacity="0.65"
+                        CornerRadius="25">
+                    <StackPanel Margin="20">
                         <TextBlock Text="Aurora Radio 极光电台"
-                                   FontSize="20"
+                                   FontSize="22"
                                    TextWrapping="Wrap"/>
                         <TextBlock Text="{Binding IdInfo}"
-                                   FontSize="20"
+                                   FontSize="22"
                                    TextWrapping="Wrap"/>
                         <TextBlock Text="=============================="/>
                         <TextBlock Text="{Binding SongInfo}"
-                                   FontSize="20"
+                                   FontSize="18"
                                    TextWrapping="Wrap"/>
-                        <TextBlock FontSize="20"
+                        <TextBlock FontSize="18"
                                    TextWrapping="Wrap">
                             <Run Text="专辑："/>
                             <Run Text="{Binding AlbumName}"/>
                         </TextBlock>
-                        <TextBlock FontSize="20"
+                        <TextBlock FontSize="18"
                                    TextWrapping="Wrap">
                             <Run Text="风格："/>
                             <Run Text="{Binding SongStyle}"/>
                         </TextBlock>
                         <TextBlock Text="=============================="/>
+                        <TextBlock Text="来源：网易云音乐"/>
                         <TextBlock>
                             <Run Text="背景PID："/>
                             <Run Text="{Binding BackgroundImageID}"/>
                         </TextBlock>
+                        <TextBlock Text="扫描右侧二维码快捷收听"/>
                     </StackPanel>
                 </Border>
             </Border>
-            <Border Grid.Column="1">
+            <Border Grid.Column="1"
+                    Background="Transparent">
                 <avalonia:QrCode Data="{Binding QrCodeData}"
                                  Height="250"
                                  Width="250"
                                  HorizontalAlignment="Center"
                                  VerticalAlignment="Center"
                                  CornerRadius="25"
-                                 Dot="Circle"/>
+                                 Dot="Circle"
+                                 Background="White"
+                                 Opacity="0.65"
+                                 >
+                    <avalonia:QrCode.Foreground>
+                        <LinearGradientBrush>
+                            <GradientStop Offset="0"
+                                          Color="#8080ff" />
+                            <GradientStop Offset="1"
+                                          Color="#fb81fe" />
+                        </LinearGradientBrush>
+                    </avalonia:QrCode.Foreground>
+                </avalonia:QrCode>
             </Border>
         </Grid>
     </Border>
