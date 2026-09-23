@@ -24,6 +24,11 @@ public partial class MainViewModel : ViewModelBase
 
     [ObservableProperty] public partial bool SingleImgMode { get; set; } = false; // 单图模式
 
+    [ObservableProperty] public partial bool UseLocalImage { get; set; } = false; // 使用本地图片
+
+    [ObservableProperty] public partial string ImgPath { get; set; } // 图片路径
+
+
     [ObservableProperty] public partial string BackgroundImageID { get; set; }
 
     [ObservableProperty] public partial string IDNumber { get; set; }
@@ -94,11 +99,24 @@ public partial class MainViewModel : ViewModelBase
         }
 
         InfoBar = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}][INFO] Downloading background image...";
-        // 下载背景图并获取保存路径
-        var savePath =  await ImageDownloader.DownloadWithHeadersAsync(BackgroundImageID, IDNumber, SingleImgMode);
-
-        // 设置卡片背景
-        CardImage = new Bitmap(savePath);
+        if (!UseLocalImage)
+        {
+            // 下载背景图片
+            var savePath =  await ImageDownloader.DownloadWithHeadersAsync(BackgroundImageID, IDNumber, SingleImgMode);
+            CardImage = new Bitmap(savePath);
+        }
+        else
+        {
+            if (!File.Exists(ImgPath))
+            {
+                InfoBar = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}][ERROR] Local image file does not exist.";
+                return;
+            }
+            else
+            {
+                CardImage = new Bitmap(ImgPath);
+            }
+        }
 
         InfoBar = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}][INFO] Apply background image successful.";
 

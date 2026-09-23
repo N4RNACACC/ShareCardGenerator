@@ -58,6 +58,9 @@
                         <TextBox Text="{Binding IDNumber}"
                                  PlaceholderText="Num"
                                  Margin="2 0 0 0"/>
+                        <TextBox Text="{Binding ImgPath}"
+                                 PlaceholderText="Local Image Path"
+                                 Margin="2 0 0 0"/>
                     </StackPanel>
                 </Grid>
             </Border>
@@ -101,6 +104,8 @@
                 <StackPanel Orientation="Horizontal">
                     <CheckBox Content="Single Img Mode"
                               IsChecked="{Binding SingleImgMode}"/>
+                    <CheckBox Content="Use local image"
+                              IsChecked="{Binding UseLocalImage}"/>
                     <Button Content="Generate Card"
                             Command="{Binding GenerateCommand}"/>
                     <Button Content="Save Card"
