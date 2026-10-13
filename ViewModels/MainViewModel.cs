@@ -33,7 +33,7 @@ public partial class MainViewModel : ViewModelBase
 
     [ObservableProperty] public partial string IDNumber { get; set; }
 
-    [ObservableProperty] public partial string SourceUrl { get; set; }
+    [ObservableProperty] public partial string MusicID { get; set; }
 
     [ObservableProperty] public partial string QrCodeData { get; set; }
 
@@ -47,7 +47,7 @@ public partial class MainViewModel : ViewModelBase
 
     public string SongInfo => $"{SongTitle} - {ArtistName}";
 
-    public event System.EventHandler? SaveRequested;
+    public event EventHandler? SaveRequested;
 
     [RelayCommand] private void Save()
     {
@@ -92,16 +92,15 @@ public partial class MainViewModel : ViewModelBase
 
     [RelayCommand] private async Task Generate()
     {
-        if (string.IsNullOrEmpty(BackgroundImageID) || string.IsNullOrEmpty(SourceUrl))
-        {
-            InfoBar = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}][ERROR] Background image PID or URL is not set or invalid.";
-            return;
-        }
-
-        InfoBar = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}][INFO] Downloading background image...";
         if (!UseLocalImage)
         {
+            if (string.IsNullOrEmpty(BackgroundImageID))
+            {
+                InfoBar = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}][ERROR] Background image ID is not set.";
+                return;
+            }
             // 下载背景图片
+            InfoBar = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}][INFO] Downloading background image...";
             var savePath =  await ImageDownloader.DownloadWithHeadersAsync(BackgroundImageID, IDNumber, SingleImgMode);
             CardImage = new Bitmap(savePath);
         }
@@ -112,22 +111,20 @@ public partial class MainViewModel : ViewModelBase
                 InfoBar = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}][ERROR] Local image file does not exist.";
                 return;
             }
-            else
-            {
-                CardImage = new Bitmap(ImgPath);
-            }
+            CardImage = new Bitmap(ImgPath);
         }
 
         InfoBar = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}][INFO] Apply background image successful.";
 
         // 生成二维码
-        if (string.IsNullOrEmpty(SourceUrl))
+        if (string.IsNullOrEmpty(MusicID))
         {
             InfoBar = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}][ERROR] URL is not set or invalid.";
         }
         else
         {
-            QrCodeData = SourceUrl;
+            var url = $"https://music.163.com/song?id={MusicID}"; // Build the music url
+            QrCodeData = url; 
             InfoBar = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}][INFO] QrCode generate successful.";
         }
     }
