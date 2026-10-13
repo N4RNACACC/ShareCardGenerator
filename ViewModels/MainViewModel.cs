@@ -1,4 +1,5 @@
 using System;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Threading.Tasks;
 using Avalonia.Media;
@@ -44,6 +45,13 @@ public partial class MainViewModel : ViewModelBase
     [ObservableProperty] public partial string AlbumName { get; set; }
 
     [ObservableProperty] public partial string SongStyle { get; set; }
+
+    public ObservableCollection<string> AlignTypes { get; } = new()
+    {
+        "Uniform" , "UniformToFill" , "Fill" , 
+    };
+
+    [ObservableProperty] public partial string SelectedType { get; set; }
 
     public string SongInfo => $"{SongTitle} - {ArtistName}";
 

@@ -17,7 +17,8 @@
 
     <Border>
         <Border.Background>
-            <ImageBrush Source="{Binding CardImage}" Stretch="UniformToFill"/>
+            <ImageBrush Source="{Binding CardImage}"
+                        Stretch="{Binding SelectedType}"/>
         </Border.Background>
         <Grid ColumnDefinitions="1.5*, *">
             <Border Grid.Column="0"

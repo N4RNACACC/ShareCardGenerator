@@ -106,6 +106,9 @@
                               IsChecked="{Binding SingleImgMode}"/>
                     <CheckBox Content="Use local image"
                               IsChecked="{Binding UseLocalImage}"/>
+                    <ComboBox PlaceholderText="Image Align"
+                              ItemsSource="{Binding AlignTypes}"
+                              SelectedItem="{Binding SelectedType}"/>
                     <Button Content="Generate Card"
                             Command="{Binding GenerateCommand}"/>
                     <Button Content="Save Card"

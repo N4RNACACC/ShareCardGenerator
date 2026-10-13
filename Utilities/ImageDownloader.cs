@@ -37,13 +37,13 @@ public static class ImageDownloader
         }
 
         // 初始化Http请求
-        using var request = new HttpRequestMessage(HttpMethod.Get, url);
+        var request = new HttpRequestMessage(HttpMethod.Get, url);
 
         // 模拟User-Agent
-        request.Headers.Add("User-Agent",
+        request.Headers.Add("User-Agent", 
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:150.0) Gecko/20100101 Firefox/150.0");
 
-        using var response = await HttpClient.SendAsync(request);
+        var response = await HttpClient.SendAsync(request);
         response.EnsureSuccessStatusCode();
 
         var bytes = await response.Content.ReadAsByteArrayAsync();
